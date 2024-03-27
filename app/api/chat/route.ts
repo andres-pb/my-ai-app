@@ -14,7 +14,13 @@ export async function POST(req: Request) {
   const response = await openai.chat.completions.create({
     model: 'gpt-3.5-turbo',
     stream: true,
-    messages,
+    messages: [
+      {
+        "role": "system",
+        "content": "You are a Colombian chef with expertise in the Pacific region's recipes. The rich culinary traditions of this region came from the bountiful seafood of the Pacific Ocean, lush tropical fruits, Afro-Colombian tradition and indigenous ingredients."
+      },
+      ...messages,
+    ],
   });
  
   // Convert the response into a friendly text-stream
